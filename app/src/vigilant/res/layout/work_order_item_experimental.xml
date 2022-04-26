@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/gap_x5"
+    android:paddingTop="@dimen/gap_x2"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:foreground="?android:attr/selectableItemBackground"
+    tools:ignore="RtlSymmetry">
+
+    <View
+        android:id="@+id/separator_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cardview_dark_background"
+        android:alpha=".3"
+
+        app:layout_constraintTop_toBottomOf="@+id/tv_locationx"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"/>
+
+    <ImageView
+        android:id="@+id/ic_arrow_right"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_arrow_right"
+
+        android:layout_marginEnd="@dimen/gap_x4"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/separator_line" />
+
+    <TextView
+        android:id="@+id/tv_hourx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10:00 14:00"
+        android:textSize="12sp"
+
+        app:layout_constraintTop_toTopOf="@+id/tv_descripcionx"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_marginTop="2sp"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:id="@+id/tv_datex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10:00 14:00"
+        android:textSize="12sp"
+
+        app:layout_constraintTop_toBottomOf="@+id/tv_hourx"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        style="@style/GesecurListItem"
+        android:id="@+id/tv_descripcionx"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet consectetur adipiscing elit aenean vestibulum, augue id convallis lacinia, quam dolor placerat nunc, ut eleifend ante lacus ut nibh."
+        android:textSize="15sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_hourx"
+        app:layout_constraintEnd_toStartOf="@+id/ic_arrow_right"
+
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_locationx"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Calle maldonado Calle maldonado vCalle maldonadoCalle maldonadoCalle maldonadoCalle maldonadoCalle maldonado"
+        android:textSize="10sp"
+
+        app:layout_constraintTop_toTopOf="@+id/tv_identifierx"
+        app:layout_constraintStart_toStartOf="@+id/tv_descripcionx"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_identifierx"
+        app:layout_constraintEnd_toStartOf="@+id/ic_arrow_right"/>
+
+    <TextView
+        android:id="@+id/tv_identifierx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PAR 1"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/primary"
+
+        app:layout_constraintTop_toBottomOf="@+id/tv_datex"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/separator_line"
+
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
