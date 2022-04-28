@@ -1,8 +1,6 @@
 package com.gesecur.app.ui.vigilant.services
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.ContextWrapper
 import android.graphics.Color
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -12,9 +10,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gesecur.app.R
-import com.google.android.material.internal.ForegroundLinearLayout
-import kotlin.coroutines.coroutineContext
-import kotlin.reflect.jvm.internal.impl.resolve.scopes.receivers.ThisClassReceiver
 
 class ServicesAdapter (private val workList: ArrayList<ServicesCard>,
 private val clickListener: (ServicesCard) -> Unit): RecyclerView.Adapter<ServicesAdapter.MyViewHolder>(){
