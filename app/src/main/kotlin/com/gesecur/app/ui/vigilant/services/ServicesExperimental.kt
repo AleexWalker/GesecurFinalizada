@@ -1,6 +1,7 @@
 package com.gesecur.app.ui.vigilant.services
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,36 +11,40 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gesecur.app.R
+import com.gesecur.app.databinding.ActivityServicesBinding
 
-import com.gesecur.app.databinding.ActivityServicesExperimentalBinding
 import com.gesecur.app.databinding.CustomAlertDialogBinding
 import com.gesecur.app.ui.auth.AuthActivity
 import com.gesecur.app.ui.vigilant.VigilantActivity
 import com.gesecur.app.ui.vigilant.services.repository.Repository
 import com.gesecur.app.utils.getCurrentLocation
+import com.google.android.material.card.MaterialCardView
 import java.lang.NullPointerException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ServicesExperimental(): AppCompatActivity() {
 
-    private lateinit var binding: ActivityServicesExperimentalBinding
+    private lateinit var binding: ActivityServicesBinding
     private lateinit var viewModel: ServicesViewModel
-    private lateinit var bindingAlert: CustomAlertDialogBinding
 
+    private var LAUNCH_SECOND_ACTIVITY: Int = 1
+    private var flag: Boolean = false
     private var vigilantId: Long = 0
     private var vigilantCode: Long = 0
 
     @SuppressLint("SetTextI18n", "LogNotTimber")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityServicesExperimentalBinding.inflate(layoutInflater)
-        bindingAlert = CustomAlertDialogBinding.inflate(layoutInflater)
+        binding = ActivityServicesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolbarTextDay.text = "${getCurrentDay()} ${getCurrentDayNumber()} de ${getCurrentMonth()}"
@@ -141,13 +146,16 @@ class ServicesExperimental(): AppCompatActivity() {
         binding.exitImage.setOnClickListener {
             generateCustomAlertDialogCloseSession()
         }
+
+        binding.botonEmergencia.setOnClickListener {
+            generateCustomAlertDialogBotonEmergencia()
+        }
     }
 
     /**
      * Función para generar el díalogo de cerrar sesión y volver a la pantalla de Autentificación
      * @param dialogView: AlertDialog personalizado con Positive y Negative Button
      */
-
     private fun generateCustomAlertDialogCloseSession() {
         val dialogView = AlertDialog.Builder(this)
         dialogView
@@ -174,7 +182,6 @@ class ServicesExperimental(): AppCompatActivity() {
      * Función para obtener el código personal de cada vigilante desde AuthFragment.
      * @param vigilantId: Id personal de cada vigilante
      */
-
     @SuppressLint("LogNotTimber")
     private fun loadId(): Long {
         vigilantId = intent.extras!!.getString("vigilantId", null)!!.toLong()
@@ -191,7 +198,6 @@ class ServicesExperimental(): AppCompatActivity() {
      * Funciones dedicadas a obtener el Día, el Mes y el Número de dicho día respectivamente.
      * Utilizadas en la toolbar.
      */
-
     private fun getCurrentDay(): String {
         return SimpleDateFormat("EEEE", Locale.getDefault()).format(Date())
             .replaceFirstChar { it.toUpperCase() }
@@ -211,7 +217,6 @@ class ServicesExperimental(): AppCompatActivity() {
      * Función dedicada a enviar los datos en función del item elegido del RecyclerView por el vigilante.
      * Enviados a VigilantActivity y posteriormente se hará la llamada @POST.
      */
-
     @SuppressLint("LogNotTimber")
     private fun saveData(vigilanteId: Long, latitud: String, longitud: String, cuadranteId: Long) {
         val sharedPreferences = getSharedPreferences("datosPost", Context.MODE_PRIVATE)
@@ -224,6 +229,59 @@ class ServicesExperimental(): AppCompatActivity() {
         editor.putString("lon", longitud)
         editor.putLong("cuadranteId", cuadranteId)
         editor.putLong("vigilantCode", vigilantCode)
+
         editor.apply()
     }
+
+    private fun generateCustomAlertDialogBotonEmergencia() {
+
+        val view = View.inflate(this, R.layout.custom_alert_dialog_fab_button, null)
+        val builder = this.let { it1 -> AlertDialog.Builder(it1) }
+        builder.setView(view)
+        val dialog = builder.create()
+
+        dialog.show()
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val buttonFinalize = view.findViewById<MaterialCardView>(R.id.custom_card_finalize)
+        val buttonCancel = view.findViewById<MaterialCardView>(R.id.custom_card_cancel)
+        val editTextVigilantCode = view.findViewById<EditText>(R.id.alertDialogEditText)
+
+        buttonFinalize.setOnClickListener {
+            if (editTextVigilantCode.text.isEmpty()) {
+                Toast.makeText(this, "¡Introduce tu código de vigilante!", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.e("vigilantCode", vigilantCode.toString())
+                Log.e("editTextVigilantCode", editTextVigilantCode.text.toString())
+                if (vigilantCode.toString() == editTextVigilantCode.text.toString()) {
+                    getCurrentLocation { location ->
+                        if (location != null) {
+                            saveData(vigilantId, location.latitude.toString(), location.longitude.toString(), -1)
+                        }
+                    }
+                    startActivityForResult(Intent(this, VigilantActivity::class.java), LAUNCH_SECOND_ACTIVITY)
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this, "¡Código Incorrecto!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        buttonCancel.setOnClickListener {
+            Log.e("Prueba", "Cancel")
+            dialog.dismiss()
+        }
+
+    }
+
+    /**override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+        if (requestCode == LAUNCH_SECOND_ACTIVITY)
+            if (resultCode == Activity.RESULT_OK)
+                Log.e("Prueba", "Turno Iniciado")
+            if (resultCode == Activity.RESULT_CANCELED)
+                Log.e("Prueba", "Turno cancelado")
+    }*/
 }

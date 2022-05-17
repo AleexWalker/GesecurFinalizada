@@ -61,8 +61,8 @@ class OperatorFragment : BaseFragment(R.layout.fragment_operator) {
             navController.navigate(
                 when(tab?.position) {
                     0 -> R.id.nav_operator_management_plani
-                    1 -> R.id.nav_operator_management_parts
-                    else -> R.id.nav_operator_incidences
+                    else -> R.id.nav_operator_management_parts
+                    //else -> R.id.nav_operator_incidences
                 })
         }
     }
@@ -76,13 +76,13 @@ class OperatorFragment : BaseFragment(R.layout.fragment_operator) {
             }
         }
 
-        incidenceViewModel.mainViewAction.observe(viewLifecycleOwner, {
+        /**incidenceViewModel.mainViewAction.observe(viewLifecycleOwner, {
             when(it) {
                 is IncidencesViewModel.MainAction.navigateToAddIncidence -> {
                     navigateToAddIncidence()
                 }
             }
-        })
+        })*/
     }
 
     private fun onPartSelected(workPart: WorkPart) {
@@ -119,11 +119,11 @@ class OperatorFragment : BaseFragment(R.layout.fragment_operator) {
         parentFragmentManager.primaryNavigationFragment?.findNavController()?.navigate(action)
     }
 
-    private fun navigateToAddIncidence() {
+    /**private fun navigateToAddIncidence() {
         val action = OperatorFragmentDirections.actionOperatorFragmentToIncidencesAddIncidenceFragment()
 
         parentFragmentManager.primaryNavigationFragment?.findNavController()?.navigate(action)
-    }
+    }*/
 
     private fun navigateToUserProfile() {
         val action = OperatorFragmentDirections.actionOperatorFragmentToUserProfileFragment()

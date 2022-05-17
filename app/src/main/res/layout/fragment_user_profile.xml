@@ -92,7 +92,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/option_close_session"
+        android:id="@+id/option_incidences"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:paddingStart="@dimen/gap_x6"
@@ -101,13 +101,54 @@
         app:layout_constraintTop_toBottomOf="@id/option_mileage">
 
         <View
-            android:id="@+id/separator_line_session"
+            android:id="@+id/separator_line_incidences"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray"
             android:alpha=".3"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+        <ImageView
+            android:id="@+id/ic_arrow_right_incidences"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_marginEnd="@dimen/gap_x4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/separator_line_incidences" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/GesecurListItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="@string/PROFILE_INCIDENCES"
+            android:layout_marginEnd="@dimen/gap_x2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/separator_line_incidences"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/option_close_session"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingStart="@dimen/gap_x6"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintTop_toBottomOf="@id/option_incidences">
+
+        <View
+            android:id="@+id/separator_line_session"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:alpha=".3"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             style="@style/GesecurListItem"
@@ -123,6 +164,5 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

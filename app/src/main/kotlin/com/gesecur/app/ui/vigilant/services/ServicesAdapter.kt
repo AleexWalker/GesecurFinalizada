@@ -42,7 +42,7 @@ private val clickListener: (ServicesCard) -> Unit): RecyclerView.Adapter<Service
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.work_order_item_experimental, parent, false)) { clickListener(workList[it.toInt()]) }
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.work_order_item_services, parent, false)) { clickListener(workList[it.toInt()]) }
     }
 
     @SuppressLint("ResourceAsColor")

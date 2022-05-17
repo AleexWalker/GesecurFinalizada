@@ -13,8 +13,7 @@ import com.gesecur.app.databinding.PlanificationInternalItemBinding
 import com.gesecur.app.domain.models.Personal
 import com.gesecur.app.utils.formatRender
 
-
-class PlanificationInternalAdapter : ListAdapter<PlanificationInternalAdapter.PlanificationInternalItem, PlanificationInternalAdapter.PlanificationInternalItemViewHolder>(PlanificationInternalItemComparator) {
+class PlanificationInternalAdapter: ListAdapter<PlanificationInternalAdapter.PlanificationInternalItem, PlanificationInternalAdapter.PlanificationInternalItemViewHolder>(PlanificationInternalItemComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanificationInternalItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.planification_internal_item, parent, false)
@@ -47,7 +46,6 @@ class PlanificationInternalAdapter : ListAdapter<PlanificationInternalAdapter.Pl
             return oldItem == newItem
         }
     }
-
 
     data class PlanificationInternalItem(
         val desc: String,

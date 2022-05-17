@@ -1,16 +1,14 @@
 package com.gesecur.app.ui.vigilant
 
+import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.gesecur.app.R
 import com.gesecur.app.databinding.ActivityVigilantBinding
 import com.gesecur.app.ui.common.base.BaseActivity
-import com.gesecur.app.ui.common.toolbar.ToolbarOptions
-import com.gesecur.app.utils.showConfirm
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.gesecur.app.ui.vigilant.services.ServicesExperimental
 
 class VigilantActivity : BaseActivity(R.layout.activity_vigilant) {
 
@@ -36,4 +34,5 @@ class VigilantActivity : BaseActivity(R.layout.activity_vigilant) {
     fun hideToolbarExtra() {
         binding.toolbar.hideExtra()
     }
+
 }

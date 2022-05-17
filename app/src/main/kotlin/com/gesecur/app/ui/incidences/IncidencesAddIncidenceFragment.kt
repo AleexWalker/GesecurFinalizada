@@ -1,7 +1,5 @@
 package com.gesecur.app.ui.incidences
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.location.Address
 import android.os.Bundle

@@ -3,16 +3,17 @@ package com.gesecur.app.ui.operator.workorder.job
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+
 import by.kirich1409.viewbindingdelegate.viewBinding
+
 import com.gesecur.app.R
 import com.gesecur.app.databinding.JobItemBinding
 import com.gesecur.app.domain.models.Job
-import com.gesecur.app.domain.models.Material
-
 
 class JobsAdapter : ListAdapter<Job, JobsAdapter.JobHolder>(JobComparator) {
 

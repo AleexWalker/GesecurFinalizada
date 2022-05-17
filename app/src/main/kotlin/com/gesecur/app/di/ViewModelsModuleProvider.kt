@@ -51,7 +51,10 @@ object ViewModelsModuleProvider : ModuleProvider {
             viewModel {
                 PersonalViewModel(
                     userRepository = get(),
-                    personalRepository = get()
+                    personalRepository = get(),
+                    //
+                    incidenceRepository = get()
+                    //
                 )
             }
         }

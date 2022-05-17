@@ -64,11 +64,9 @@ class VigilantFragment : BaseFragment(R.layout.fragment_vigilant) {
                         viewModel.closeSession()
                         navigateToSplash()
                     }
-
                 }
             })
         }
-
     }
 
     private fun navigateOnTabSelected(tab: TabLayout.Tab?) {

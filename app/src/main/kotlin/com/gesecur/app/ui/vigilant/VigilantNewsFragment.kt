@@ -1,5 +1,6 @@
 package com.gesecur.app.ui.vigilant
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
@@ -41,6 +42,7 @@ class VigilantNewsFragment : BaseFragment(R.layout.fragment_vigilant_news) {
     private val viewModel by sharedViewModel<VigilantViewModel>()
     private var cuadranteId: Long = 0
     private var vigilantCode: Long = 0
+    private var vigilantId: Long = 0
 
     companion object {
         const val WORK_NAME = "scheduledNewsWork"
@@ -48,6 +50,8 @@ class VigilantNewsFragment : BaseFragment(R.layout.fragment_vigilant_news) {
 
     override fun setupViews() {
         setTitle(title = LocalDate.now().toToolbarFormat())
+
+        getVigilantData()
 
         with(binding) {
             disableAll()
@@ -70,7 +74,7 @@ class VigilantNewsFragment : BaseFragment(R.layout.fragment_vigilant_news) {
                 viewModel.addNewRegistry(viewModel.currentTurn.value!!.id, NewsRegistry.TYPE.NO_NEWS)
             }
             btnEmergency.setOnClickListener {
-                viewModel.addNewRegistry(viewModel.currentTurn.value!!.id, NewsRegistry.TYPE.URGENT)
+                generateCustomAlertDialogEmergency()
             }
         }
     }
@@ -107,6 +111,40 @@ class VigilantNewsFragment : BaseFragment(R.layout.fragment_vigilant_news) {
                 Log.e("editTextVigilantCode", editTextVigilantCode.text.toString())
                 if (vigilantCode.toString() == editTextVigilantCode.text.toString()) {
                     endTurn()
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(context, "¡Código Incorrecto!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        buttonCancel.setOnClickListener {
+            Log.e("Prueba", "Cancel")
+            dialog.dismiss()
+        }
+    }
+
+    private fun generateCustomAlertDialogEmergency() {
+
+        val view = View.inflate(context, R.layout.custom_alert_dialog_emergency, null)
+        val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
+        builder!!.setView(view)
+        val dialog = builder.create()
+        dialog.show()
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val buttonFinalize = view.findViewById<MaterialCardView>(R.id.custom_card_finalize)
+        val buttonCancel = view.findViewById<MaterialCardView>(R.id.custom_card_cancel)
+        val editTextVigilantCode = view.findViewById<EditText>(R.id.alertDialogEditText)
+
+        buttonFinalize.setOnClickListener {
+            if (editTextVigilantCode.text.isEmpty()) {
+                Toast.makeText(context, "¡Introduce tu código de vigilante!", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.e("vigilantCode", vigilantCode.toString())
+                Log.e("editTextVigilantCode", editTextVigilantCode.text.toString())
+                if (vigilantCode.toString() == editTextVigilantCode.text.toString()) {
+                    viewModel.addNewRegistry(viewModel.currentTurn.value!!.id, NewsRegistry.TYPE.URGENT)
                     dialog.dismiss()
                 } else {
                     Toast.makeText(context, "¡Código Incorrecto!", Toast.LENGTH_SHORT).show()
@@ -185,8 +223,10 @@ class VigilantNewsFragment : BaseFragment(R.layout.fragment_vigilant_news) {
             requireContext().getSharedPreferences("datosPost", Context.MODE_PRIVATE)
         cuadranteId = sharedPreferences.getLong("cuadranteId", 0)
         vigilantCode = sharedPreferences.getLong("vigilantCode", 0)
+        vigilantId = sharedPreferences.getLong("vigilanteId", 0)
         Log.e("CuadId", cuadranteId.toString())
         Log.e("VigiId", vigilantCode.toString())
+        Log.e("VigiId", vigilantId.toString())
     }
 
     private fun endTurn() {
@@ -245,4 +285,13 @@ class VigilantNewsFragment : BaseFragment(R.layout.fragment_vigilant_news) {
         WorkManager.getInstance(requireContext())
             .cancelAllWork()
     }
+
+    /**@SuppressLint("LogNotTimber")
+    private fun comprobacion() {
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("datosPost", Context.MODE_PRIVATE)
+        Log.e("Prueba1", sharedPreferences.getString("lat", null).toString())
+        Log.e("Prueba2", sharedPreferences.getString("lon", null).toString())
+        Log.e("Prueba3", sharedPreferences.getLong("vigilanteId", 0).toString())
+        Log.e("Prueba4", sharedPreferences.getLong("cuadranteId", -1).toString())
+    }*/
 }

@@ -95,8 +95,8 @@ class VigilantRepositoryImpl(
         return withContext(Dispatchers.IO) {
             Either.catch {
                 service.getVigilantTurns(userId).result.firstOrNull {
-                    it.initDate?.toLocalDate() == LocalDate.now() &&
-                            it.status != Turn.STATE.FINISHED
+                    //it.initDate?.toLocalDate() == LocalDate.now() && Finalizar turno día siguiente.
+                    it.status != Turn.STATE.FINISHED
                 }
             }
                 .mapLeft { it.toError() }

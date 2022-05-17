@@ -21,8 +21,8 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
         binding.btnLogin.setOnClickListener { doLogin() }
 
         if(BuildConfig.DEBUG) {
-            binding.editEmail.setText("test@gruposimetria.com")
-            binding.editPassword.setText("2021")
+            binding.editEmail.setText("casva@gmail.com")
+            binding.editPassword.setText(".456_")
         }
     }
 

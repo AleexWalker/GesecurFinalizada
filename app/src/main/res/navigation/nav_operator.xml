@@ -20,11 +20,13 @@
             app:destination="@id/operatorWorkPlaniDetailFragment" />
 
         <action
-            android:id="@+id/action_operatorFragment_to_incidencesAddIncidenceFragment"
-            app:destination="@id/incidencesAddIncidenceFragment" />
-        <action
             android:id="@+id/action_operatorFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+
+        <!--<action
+            android:id="@+id/action_operatorFragment_to_incidencesAddIncidenceFragment"
+            app:destination="@id/incidencesAddIncidenceFragment" />-->
+
     </fragment>
 
     <fragment
@@ -122,22 +124,30 @@
             android:name="com.gesecur.app.ui.incidences.IncidencesFragment"
             android:label="IncidencesFragment"
             tools:layout="@layout/fragment_incidences_list" >
+
             <action
                 android:id="@+id/action_incidencesFragment_to_incidencesAddIncidenceFragment"
                 app:enterAnim="@anim/pop_to_top"
                 app:popExitAnim="@anim/pop_out_bottom"
-                app:destination="@id/incidencesAddIncidenceFragment" />
+                app:destination="@id/incidencesAddIncidenceFragment2" />
+
+            <action
+                android:id="@+id/action_vigilantFragment_to_incidencesAddIncidenceFragment2"
+                app:enterAnim="@anim/pop_to_top"
+                app:popExitAnim="@anim/pop_out_bottom"
+                app:destination="@id/incidencesAddIncidenceFragment2" />
+
         </fragment>
 
     </navigation>
+
     <fragment
         android:id="@+id/operatorAddJobFragment"
         android:name="com.gesecur.app.ui.operator.workorder.job.OperatorAddJobFragment"
         android:label="OperatorAddJobFragment" >
         <argument
             android:name="workorder_id"
-            app:argType="long"
-            />
+            app:argType="long" />
 
         <argument
             android:name="workpart_id"
@@ -184,6 +194,10 @@
         <action
             android:id="@+id/action_userProfileFragment_to_personalMileageListFragment"
             app:destination="@id/personalMileageListFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_personalIncidenceListFragment"
+            app:destination="@id/incidencesFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/personalExpensesListFragment"
@@ -200,6 +214,17 @@
         <action
             android:id="@+id/action_personalMileageListFragment_to_personalAddMileageFragment"
             app:destination="@id/personalAddMileageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/incidencesFragment"
+        android:name="com.gesecur.app.ui.incidences.IncidencesFragment"
+        android:label="IncidencesFragment"
+        tools:layout="@layout/fragment_incidences_list" >
+        <action
+            android:id="@+id/action_incidencesFragment_to_incidencesAddIncidenceFragment"
+            app:enterAnim="@anim/pop_to_top"
+            app:popExitAnim="@anim/pop_out_bottom"
+            app:destination="@id/incidencesAddIncidenceFragment" />
     </fragment>
     <fragment
         android:id="@+id/personalAddExpenseFragment"

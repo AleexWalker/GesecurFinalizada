@@ -52,6 +52,7 @@
             android:label="IncidencesFragment"
             tools:layout="@layout/fragment_incidences_list" />
     </navigation>
+
     <fragment
         android:id="@+id/vigilantObservationsListFragment"
         android:name="com.gesecur.app.ui.vigilant.registry.VigilantObservationsListFragment"
@@ -62,6 +63,7 @@
         app:argType="long" />
 
     </fragment>
+
     <fragment
         android:id="@+id/incidencesAddIncidenceFragment2"
         android:name="com.gesecur.app.ui.incidences.IncidencesAddIncidenceFragment"

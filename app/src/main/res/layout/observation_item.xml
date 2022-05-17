@@ -11,8 +11,6 @@
     android:layout_marginVertical="@dimen/gap_x1"
     android:background="@color/white">
 
-
-
     <com.google.android.material.textview.MaterialTextView
         style="@style/GesecurListItem.Medium"
         android:id="@+id/tv_text"

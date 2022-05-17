@@ -16,14 +16,19 @@ import com.gesecur.app.utils.toToolbarFormat
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.time.LocalDate
 
+/**
+ * Clase Incidencias para utilizar con los técnicos
+ */
+
 @SuppressLint("NonConstantResourceId")
 @ToolbarOptions(
     showToolbar = true,
+    homeButton = GesecurToolbar.HomeButton.BACK,
     titleRes = R.string.INCIDENCES_LIST_INCIDENCE)
-class IncidencesFragment : BaseFragment(R.layout.fragment_incidences_list) {
+class IncidencesFragmentOperator : BaseFragment(R.layout.fragment_incidences_list) {
 
     private val binding by viewBinding(FragmentIncidencesListBinding::bind)
-    private val viewModel by sharedViewModel<IncidencesViewModel>()
+    private val viewModel by sharedViewModel<PersonalViewModel>()
 
     private val adapter = IncidencesAdapter()
 
@@ -34,9 +39,10 @@ class IncidencesFragment : BaseFragment(R.layout.fragment_incidences_list) {
             rvIncidences.layoutManager = LinearLayoutManager(requireContext())
             rvIncidences.adapter = adapter
 
-            btnAdd.setOnClickListener { viewModel.goToAddIncidence()
-                //val action = IncidencesFragmentDirections.actionIncidencesFragmentToIncidencesAddIncidenceFragment()
-                //parentFragmentManager.primaryNavigationFragment?.findNavController()?.navigate(action)
+            btnAdd.setOnClickListener {
+                viewModel.goToAddIncidence()
+                val action = IncidencesFragmentDirections.actionIncidencesFragmentToIncidencesAddIncidenceFragment()
+                parentFragmentManager.primaryNavigationFragment?.findNavController()?.navigate(action)
             }
         }
 
@@ -73,5 +79,4 @@ class IncidencesFragment : BaseFragment(R.layout.fragment_incidences_list) {
 
         adapter.submitList(incidencesList)
     }
-
 }

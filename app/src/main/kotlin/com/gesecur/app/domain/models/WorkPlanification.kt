@@ -1,8 +1,8 @@
 package com.gesecur.app.domain.models
 
 import android.os.Parcelable
-import com.gesecur.app.data.gesecur.serializers.LocalDateTimeSerializer
 import com.gesecur.app.data.gesecur.serializers.LocalDateTimeSerializerNoNanoSec
+import com.gesecur.app.ui.operator.workorder.observations.Observations
 import com.gesecur.app.utils.formatRender
 import com.gesecur.app.utils.toHour
 import kotlinx.parcelize.Parcelize
@@ -34,6 +34,9 @@ data class WorkPlanification(
     @SerialName("partes") val parts: List<WorkPart>? = null,
     @SerialName("materiales") val materials: @RawValue List<Material> = arrayListOf(),
     @SerialName("otros") val others: @RawValue List<Other> = arrayListOf(),
+
+    // Observaciones
+    @SerialName("observaciones_tecnico") val observations: @RawValue List<Observations> = arrayListOf(),
     @SerialName("trabajos") val jobs: @RawValue List<Job> = arrayListOf(),
     @SerialName("servicios") val services: @RawValue List<Service> = arrayListOf(),
     @SerialName("personal") val personal: @RawValue List<Personal> = arrayListOf(),

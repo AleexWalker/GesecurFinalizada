@@ -83,11 +83,10 @@ class OperatorWorkPartDetailFragment : BaseFragment(R.layout.fragment_operator_w
             }
 
             rvJobs.adapter = jobsAdapter
-            rvJobs.layoutManager = object: LinearLayoutManager(requireContext()) {
-                override fun canScrollVertically(): Boolean {
+            rvJobs.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                /**override fun canScrollVertically(): Boolean {
                     return true
-                }
-            }
+                }*/
 
             materialsAdapter.onItemMinusClick = { material, quantity ->
                 onMaterialChanged(material, quantity)

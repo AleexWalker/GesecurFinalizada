@@ -104,6 +104,7 @@
 
     <!-- INCIDENCE -->
     <string name="INCIDENCES_ADD_INCIDENCE">Añadir incidencia</string>
+    <string name="INCIDENCES_LIST_INCIDENCE">Incidencias</string>
     <string name="INCIDENCES_LIST_EMPTY">No hay incidencias</string>
     <string name="ADD_INCIDENCE_TITLE">Añadir incidencia</string>
     <string name="ADD_INCIDENCE_SELECT_INCIDENCE_HINT">Seleccionar incidencia</string>
@@ -119,7 +120,7 @@
     <string name="VIGILANT_EXIT_QUESTION">¿Seguro que deseas cerrar sesión?</string>
     <string name="VIGILANT_REGISTRY">Registro</string>
     <string name="VIGILANT_OBSERVATIONS">Observaciones</string>
-    <string name="VIGILANT_EMERGENCY">Emergency</string>
+    <string name="VIGILANT_EMERGENCY">Emergencia</string>
     <string name="VIGILANT_NO_URGENT_REQUIREMENT">Requerimiento no urgente</string>
     <string name="VIGILANT_NO_NEWS">Sin novedades</string>
     <string name="VIGILANT_START_TURN">Iniciar turno</string>
@@ -165,6 +166,7 @@
     <string name="PROFILE_MILEAGE_ADD_OWN_VEHICLE">Vehículo propio</string>
     <string name="PROFILE_CLOSE_SESSION">Cerrar sesión</string>
     <string name="PROFILE_CLOSE_SESSION_QUESTION">¿Seguro que quiere cerrar sesión?</string>
+    <string name="PROFILE_INCIDENCES">Incidencias</string>
 
     <string name="DEFAULT_NOTIFICATION_CHANNEL_ID">General</string>
     <string name="NOTIFICATION_TURN_TEXT">Recuerda realizar un registro de las novedades</string>
@@ -181,4 +183,5 @@
     <string name="PROFILE_ADD_MILEAGE_EXPENSE_IMAGE_TAKE_FROM_QUESTION">¿Desde donde deseas obtener la imagen?</string>
     <string name="PROFILE_ADD_MILEAGE_EXPENSE_IMAGE_TAKE_FROM_CAMERA">Cámara</string>
     <string name="PROFILE_ADD_MILEAGE_EXPENSE_IMAGE_TAKE_FROM_GALLERY">Galería</string>
+    <string name="WORK_PART_OBSERVATIONS">Observaciones</string>
 </resources>

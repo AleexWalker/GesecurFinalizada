@@ -101,9 +101,24 @@
         android:scrollbarSize="5dp"
         android:scrollbarThumbVertical="@color/primary"
 
-        tools:listitem="@layout/work_order_item_experimental"
+        tools:listitem="@layout/work_order_item_services"
         tools:itemCount="8">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/botonEmergencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tint="@color/white"
+
+        android:clickable="true"
+        app:srcCompat="?android:attr/alertDialogIcon"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

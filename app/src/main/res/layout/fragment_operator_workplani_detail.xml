@@ -117,7 +117,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <com.google.android.material.tabs.TabLayout
@@ -158,6 +157,13 @@
                 android:tag="@string/WORK_PART_RESOURCES"
                 android:text="@string/WORK_PART_RESOURCES" />
 
+            <com.google.android.material.tabs.TabItem
+                style="@style/Theme.Gesecur.Tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="@string/WORK_PART_OBSERVATIONS"
+                android:text="@string/WORK_PART_OBSERVATIONS" />
+
         </com.google.android.material.tabs.TabLayout>
 
         <View
@@ -168,57 +174,84 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbarThumbVertical="@color/primary"
+        android:scrollbarSize="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/gap_x3"
-            android:layout_marginTop="@dimen/gap_x3"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="0dp"
-            app:strokeColor="@color/gray"
-            app:strokeWidth="1dp"
-            android:layout_marginBottom="70dp"
-            app:cardBackgroundColor="@color/white">
+            android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_jobs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/job_item"
-                tools:itemCount="2"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/gap_x3"
+                    android:layout_marginTop="@dimen/gap_x3"
+                    android:layout_marginBottom="12dp"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_materials"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/material_item"
-                android:visibility="gone"
-                tools:itemCount="2"/>
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_other"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/other_item"
-                android:visibility="gone"
-                tools:itemCount="2"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/gray"
+                    app:strokeWidth="1dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/personal_item"
-                android:visibility="gone"
-                tools:itemCount="2"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_jobs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-        </com.google.android.material.card.MaterialCardView>
+                        android:scrollbars="vertical"
+                        android:scrollbarThumbVertical="@color/primary"
+                        android:scrollbarSize="5dp"
 
-    </FrameLayout>
+                        tools:itemCount="4"
+                        tools:listitem="@layout/planification_internal_item" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_materials"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/material_item" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/other_item" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_personal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/personal_item" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_observations"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/observations_item" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

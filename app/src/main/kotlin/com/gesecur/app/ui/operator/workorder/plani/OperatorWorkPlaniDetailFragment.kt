@@ -1,11 +1,14 @@
 package com.gesecur.app.ui.operator.workorder.plani
 
 import android.graphics.Color
+
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import by.kirich1409.viewbindingdelegate.viewBinding
+
 import com.gesecur.app.R
 import com.gesecur.app.databinding.FragmentOperatorWorkplaniDetailBinding
 import com.gesecur.app.domain.models.WorkPart
@@ -19,7 +22,9 @@ import com.gesecur.app.ui.operator.OperatorFragmentDirections
 import com.gesecur.app.ui.operator.OperatorViewModel
 import com.gesecur.app.ui.operator.workorder.parts.PersonalAdapter
 import com.gesecur.app.utils.DateUtils
+
 import com.google.android.material.tabs.TabLayout
+
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 @ToolbarOptions(
@@ -33,6 +38,7 @@ class OperatorWorkPlaniDetailFragment : BaseFragment(R.layout.fragment_operator_
         const val TAB_MATERIAL = 1
         const val TAB_OTHERS = 2
         const val TAB_PERSONAL = 3
+        const val TAB_OBSERVATIONS = 4
     }
 
     private val binding by viewBinding(FragmentOperatorWorkplaniDetailBinding::bind)
@@ -44,6 +50,8 @@ class OperatorWorkPlaniDetailFragment : BaseFragment(R.layout.fragment_operator_
     private val materialsAdapter = PlanificationInternalAdapter()
     private val othersAdapter = PlanificationInternalAdapter()
     private val personalAdapter = PersonalAdapter()
+    //
+    private val observationsAdapter = PlanificationInternalAdapter()
 
     override fun setupViews() {
 
@@ -59,6 +67,7 @@ class OperatorWorkPlaniDetailFragment : BaseFragment(R.layout.fragment_operator_
                         rvMaterials.isVisible = tab?.position == TAB_MATERIAL
                         rvOther.isVisible = tab?.position == TAB_OTHERS
                         rvPersonal.isVisible = tab?.position == TAB_PERSONAL
+                        rvObservations.isVisible = tab?.position == TAB_OBSERVATIONS
                     }
                 }
             })
@@ -91,6 +100,13 @@ class OperatorWorkPlaniDetailFragment : BaseFragment(R.layout.fragment_operator_
                 }
             }
 
+            rvObservations.adapter = observationsAdapter
+            rvObservations.layoutManager = object: LinearLayoutManager(requireContext()) {
+                override fun canScrollVertically(): Boolean {
+                    return false
+                }
+            }
+
             btnInitOrder.setOnClickListener {
                 startPlanification()
             }
@@ -102,20 +118,23 @@ class OperatorWorkPlaniDetailFragment : BaseFragment(R.layout.fragment_operator_
     }
 
     override fun setupViewModels() {
-        viewModel.workPlaniDetail.observe(viewLifecycleOwner, { onWorkPlaniLoaded(it) })
-        viewModel.viewAction.observe(viewLifecycleOwner, {
-            when(it) {
-                is BaseAction.ShowError ->  {
+        viewModel.workPlaniDetail.observe(viewLifecycleOwner) { onWorkPlaniLoaded(it) }
+        viewModel.viewAction.observe(viewLifecycleOwner) {
+            when (it) {
+                is BaseAction.ShowError -> {
                     showError(it.error)
                 }
 
                 is OperatorViewModel.Action.OnPlanificationStarted -> {
                     //setPlanificationStarted()
 
-                    viewModel.getWorkPlaniDetail(args.workPlaniId, DateUtils.localDateFromLong(args.date))
+                    viewModel.getWorkPlaniDetail(
+                        args.workPlaniId,
+                        DateUtils.localDateFromLong(args.date)
+                    )
                 }
             }
-        })
+        }
 
         viewModel.getWorkPlaniDetail(args.workPlaniId, DateUtils.localDateFromLong(args.date))
 
